@@ -1,0 +1,75 @@
+<html>
+	<header>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="nendai.jquery.js"></script>
+		<style type="text/css">
+			#nendai-calendar {
+				position: absolute;
+				background: #efefef;
+				border-radius: 5px;
+				border: 1px solid;
+			}
+			.nendai-spinner {
+				float: left;
+				padding: 5%;
+				width: 23.3%;
+				text-align: center;
+			}
+			#nendai-calendar.month-mode .nendai-spinner {
+				width: 40%;
+			}
+			.value {
+				padding: 10px 0;
+			}
+			.nendai-button {
+				text-decoration: none;
+				font-size: 1.3em;
+				font-weight: bold;
+				color: #000;
+				display: block;
+				border: 1px solid;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.nendai-button:hover {
+				background:purple;
+			}
+			.nendai-dialog-controls {
+				clear:both;
+				padding: 10px
+			}
+			.nendai-dialog-controls:after {
+				clear: both;
+				content: ' ';
+			}
+			.nendai-dialog-controls .nendai-button {
+				width: 70px;
+				padding: 5px 5px;
+				margin: 5px;
+				text-align: center;
+			}
+			.nendai-dialog-controls .nendai-button.accept { float: left; }
+			.nendai-dialog-controls .nendai-button.cancel { float: right; }
+		</style>
+	</header>
+	<body>
+		Date: <input type="text" id="date">
+<p>Lorem ipsum dolor sit amet, an soleat graeco adipiscing eum, quo vitae prompta iudicabit in. Sed et maiorum pertinacia. No vis quod nonumy intellegebat, pro graece euripidis sententiae et. Usu laudem ullamcorper at, stet tota doming et sea, laoreet electram consetetur sed ne.</p>
+<p>Mutat essent inimicus sea id, at quo solum molestie verterem, usu eius reque te. Sed ad suas vituperata accommodare. Soluta aliquando ne eum, in sea melius meliore antiopam, ei eius augue eum. Qui ei delectus efficiantur. Ea per persius virtute feugait, dicat dictas mandamus ut vis, cu mei euismod propriae. Duo nibh commodo te, purto cotidieque has eu, sumo quando conclusionemque sit at.</p>
+<p>Elit augue est id. Cu tibique lucilius qui, usu no inani summo. Eu ius illud voluptaria, ad qui quod appareat. Mel inani deserunt consulatu id. Diam molestie molestiae vel no, illud errem munere mel id.
+<p>No erat meliore mel. Probo error usu ex, decore gubergren philosophia in his, te mea solum copiosae mediocritatem. Et movet tempor dicunt pri. Prompta oporteat forensibus ad mel, eu omnes laboramus interesset nam, falli animal ei nec.
+<p>Ea ius exerci disputando, at epicurei deserunt vel. Nam imperdiet consetetur ne, qualisque appellantur ea eos. Ex nam alii debet altera, eu nulla consequuntur duo. Pro ad dico zril mandamus. Mea fabulas graecis explicari at.</p>
+Month: <input type="text" id="month">
+<p>Ea habeo justo adipisci vim, agam luptatum tacimates vel at, cu mea esse legendos postulant. Ne possit petentium has, ei quo nibh mundi discere, amet referrentur efficiantur vis no. Ea vim homero invenire, eum an odio porro dictas. Vim an nemore semper scripserit, vide regione ea per.</p>
+<p>Cum in purto paulo, nam assum omittam lobortis in. Omnium persius an qui, cum aliquando referrentur eu. Cu vel dico lobortis deterruisset, id eos wisi fastidii gubergren. Est scripta definitionem ei, delectus antiopam cum te.</p>
+<p>Dicit iriure qui cu, graecis docendi vis ad. Ferri populo denique at per. Eum cu aperiri eruditi eligendi. Mei id facilis percipitur eloquentiam, ius ut atqui nostro torquatos. Oratio docendi eum ne, ne reformidans theophrastus deterruisset vim, an assueverit appellantur has.</p>
+<p>Ea mel putant comprehensam. Ea has cetero dolorem perfecto, nonumy iriure salutatus vis in, ad pro veri erroribus. Amet scaevola urbanitas mel ex, nullam appellantur ne has. At tollit accusam delicatissimi sea. Ne oblique dissentiunt sit, pro at mandamus dissentiunt. Maiorum volumus et mei, vim ei eripuit scaevola, quo cu verear necessitatibus.</p>
+<p>Cu lobortis similique per, diceret inimicus appellantur at eos. Sed animal antiopam inciderint ei, ius nihil pertinacia ex. Eam ad alii vituperata consequuntur, eos quis maiestatis id. Meis liber eam ei, denique iracundia assentior no eum.</p>
+		<script type="text/javascript">
+		$(document).ready( function(){
+			$('#date').nendai({ year: 1999, month: 10, day: 31 });
+			$('#month').nendai({type: "month"});
+		});
+		</script>
+	</body>
+</html>
