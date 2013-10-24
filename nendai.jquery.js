@@ -8,10 +8,15 @@
             day: d.getDate(),
             month: d.getMonth() +1,
             year: d.getFullYear(),
-            type: "default" //also accept month
+            type: "default", //also accept month
+            minYear: null,
+            minMonth: null,
+            minDay: 1, //null makes it roll back
+            maxYear: null,
+            maxMonth: null,
+            maxDay: 1 //null makes it roll back
         };
 
-    // The actual plugin constructor
     function Plugin( element, options ) {
         this.element = element;
 
@@ -60,14 +65,14 @@
                 _self.container.append("<div class='nendai-spinner' id='nendai-day-spinner'><label>Day</label><a class='increment nendai-button' href='#'>+</a><div class='value'>" + day + "</div><a class='decrement nendai-button' href='#'>&#8722;</a></div>");
             _self.container.append("<div class='nendai-dialog-controls'><a class='accept nendai-button'>Accept</a><a class='cancel nendai-button'>Cancel</a></div>");
             //year
-            _self.container.children("#nendai-year-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeYear(_self,  1); });
-            _self.container.children("#nendai-year-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeYear(_self,  -1); });
+            _self.container.children("#nendai-year-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeYear(_self,  1); _self.validateDateRange(_self); });
+            _self.container.children("#nendai-year-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeYear(_self,  -1); _self.validateDateRange(_self); });
             //month
-            _self.container.children("#nendai-month-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeMonth(_self, 1); });
-            _self.container.children("#nendai-month-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeMonth(_self, -1); });
+            _self.container.children("#nendai-month-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeMonth(_self, 1); _self.validateDateRange(_self); });
+            _self.container.children("#nendai-month-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeMonth(_self, -1); _self.validateDateRange(_self); });
             //day
-            _self.container.children("#nendai-day-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeDay(_self, 1); });
-            _self.container.children("#nendai-day-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeDay(_self, -1); });
+            _self.container.children("#nendai-day-spinner").children(".increment").click( function(e) { e.preventDefault(); _self.changeDay(_self, 1); _self.validateDateRange(_self); });
+            _self.container.children("#nendai-day-spinner").children(".decrement").click( function(e) { e.preventDefault(); _self.changeDay(_self, -1); _self.validateDateRange(_self); });
             //accept
             _self.container.find('.accept').click(function(){
                 _self.storeDate(_self);
@@ -88,6 +93,7 @@
 
         changeYear: function(_self, change){
             var year = _self.getSpinnerYear(_self) + change;
+
             _self.setSpinnerYear(_self, year);
         },
         changeMonth: function(_self, change){
@@ -132,7 +138,11 @@
             return parseInt(_self.container.children("#nendai-month-spinner").children(".value").html());
         },
         getSpinnerDay: function(_self){
-            return parseInt(_self.container.children("#nendai-day-spinner").children(".value").html());
+            var day = parseInt(_self.container.children("#nendai-day-spinner").children(".value").html());
+            console.log(day);
+            if(isNaN(day)) //month mode
+                day = 1;
+            return day;
         },
 
         setSpinnerYear: function(_self, year){
@@ -150,11 +160,46 @@
                 $(_self.element).val(_self.options.year+"-"+_self.options.month);
             else
                 $(_self.element).val(_self.options.year+"-"+_self.options.month+"-"+_self.options.day);
+        },
+
+        validateDateRange: function(_self){
+
+
+            var minYear = _self.options.minYear;
+            var minMonth = _self.options.minMonth;
+            var minDay = _self.options.minDay;
+
+            var minDate = new Date(minYear,minMonth-1,minDay);
+
+            var maxYear = _self.options.maxYear;
+            var maxMonth = _self.options.maxMonth;
+            var maxDay = _self.options.maxDay;
+
+            var maxDate = new Date(maxYear,maxMonth-1,maxDay);
+            console.log(maxDate);
+            var testDate = new Date(_self.getSpinnerYear(_self),_self.getSpinnerMonth(_self)-1,_self.getSpinnerDay(_self));
+            console.log(testDate);
+            if(!(minYear == null || minMonth == null)){
+                if(minDate >= testDate){
+                        _self.setSpinnerYear(_self,minYear);
+                        _self.setSpinnerMonth(_self,minMonth);
+                        _self.setSpinnerDay(_self,minDay);
+                        return false;
+                }
+            }
+            if(!(maxYear == null || maxMonth == null)){
+                if(maxDate <= testDate){
+                                    console.log('checking max');
+
+                        _self.setSpinnerYear(_self,maxYear);
+                        _self.setSpinnerMonth(_self,maxMonth);
+                        _self.setSpinnerDay(_self,maxDay);
+                        return false;
+                }
+            }
         }
     };
 
-    // A really lightweight plugin wrapper around the constructor,
-    // preventing against multiple instantiations
     $.fn[pluginName] = function ( options ) {
         return this.each(function () {
             if (!$.data(this, "plugin_" + pluginName)) {
