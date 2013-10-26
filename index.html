@@ -34,6 +34,14 @@
 			.nendai-button:hover {
 				background:purple;
 			}
+			.nendai-button.disabled {
+				color: gray;
+				border-color: gray;
+				cursor: default;
+			}
+			.nendai-button.disabled:hover {
+				background: none;
+			}
 			.nendai-dialog-controls {
 				clear:both;
 				padding: 10px
@@ -67,8 +75,8 @@ Month: <input type="text" id="month">
 <p>Cu lobortis similique per, diceret inimicus appellantur at eos. Sed animal antiopam inciderint ei, ius nihil pertinacia ex. Eam ad alii vituperata consequuntur, eos quis maiestatis id. Meis liber eam ei, denique iracundia assentior no eum.</p>
 		<script type="text/javascript">
 		$(document).ready( function(){
-			$('#date').nendai({ year: 1999, month: 10, day: 31 });
-			$('#month').nendai({type: "month", maxYear: 2018, maxMonth: 5});
+			$('#date').nendai({ year: 1999, month: 10, day: 31, maxYear: 2005, maxMonth: 5, maxDay: 10, minYear:1992, minMonth: 10, minDay: 4 });
+			$('#month').nendai({type: "month", maxYear: 2018, maxMonth: 5, minYear:2000, minMonth: 10});
 		});
 		</script>
 	</body>

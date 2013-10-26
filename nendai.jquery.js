@@ -176,27 +176,53 @@
             var maxDay = _self.options.maxDay;
 
             var maxDate = new Date(maxYear,maxMonth-1,maxDay);
-            console.log(maxDate);
-            var testDate = new Date(_self.getSpinnerYear(_self),_self.getSpinnerMonth(_self)-1,_self.getSpinnerDay(_self));
-            console.log(testDate);
+
+            var spinnerYear = _self.getSpinnerYear(_self);
+            var spinnerMonth = _self.getSpinnerMonth(_self);
+            var spinnerDay = _self.getSpinnerDay(_self);
+
+            var testDate = new Date(spinnerYear,spinnerMonth-1,spinnerDay);
+
             if(!(minYear == null || minMonth == null)){
                 if(minDate >= testDate){
                         _self.setSpinnerYear(_self,minYear);
                         _self.setSpinnerMonth(_self,minMonth);
                         _self.setSpinnerDay(_self,minDay);
-                        return false;
                 }
             }
             if(!(maxYear == null || maxMonth == null)){
                 if(maxDate <= testDate){
-                                    console.log('checking max');
-
                         _self.setSpinnerYear(_self,maxYear);
                         _self.setSpinnerMonth(_self,maxMonth);
                         _self.setSpinnerDay(_self,maxDay);
-                        return false;
                 }
             }
+
+            if(spinnerYear <= minYear )
+                _self.container.children("#nendai-year-spinner").children(".decrement").addClass('disabled');
+            else
+                _self.container.children("#nendai-year-spinner").children(".decrement").removeClass('disabled');
+            if(spinnerYear <= minYear && spinnerMonth <= minMonth)
+                _self.container.children("#nendai-month-spinner").children(".decrement").addClass('disabled');
+            else
+                _self.container.children("#nendai-month-spinner").children(".decrement").removeClass('disabled');
+            if(spinnerYear <= minYear && spinnerMonth <= minMonth && spinnerDay <= minDay)
+                _self.container.children("#nendai-day-spinner").children(".decrement").addClass('disabled');
+            else
+                _self.container.children("#nendai-day-spinner").children(".decrement").removeClass('disabled');
+
+            if(spinnerYear >= maxYear )
+                _self.container.children("#nendai-year-spinner").children(".increment").addClass('disabled');
+            else
+                _self.container.children("#nendai-year-spinner").children(".increment").removeClass('disabled');
+            if(spinnerYear >= maxYear && spinnerMonth >= maxMonth)
+                _self.container.children("#nendai-month-spinner").children(".increment").addClass('disabled');
+            else
+                _self.container.children("#nendai-month-spinner").children(".increment").removeClass('disabled');
+            if(spinnerYear >= maxYear && spinnerMonth >= maxMonth && spinnerDay >= maxDay)
+                _self.container.children("#nendai-day-spinner").children(".increment").addClass('disabled');
+            else
+                _self.container.children("#nendai-day-spinner").children(".increment").removeClass('disabled');
         }
     };
 
