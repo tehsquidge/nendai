@@ -139,7 +139,6 @@
         },
         getSpinnerDay: function(_self){
             var day = parseInt(_self.container.children("#nendai-day-spinner").children(".value").html());
-            console.log(day);
             if(isNaN(day)) //month mode
                 day = 1;
             return day;
@@ -189,6 +188,18 @@
                         _self.setSpinnerMonth(_self,minMonth);
                         _self.setSpinnerDay(_self,minDay);
                 }
+                if( new Date(spinnerYear-1,spinnerMonth-1,spinnerDay) <= minDate )
+                    _self.container.children("#nendai-year-spinner").children(".decrement").addClass('disabled');
+                else
+                    _self.container.children("#nendai-year-spinner").children(".decrement").removeClass('disabled');
+                if( new Date(spinnerYear,spinnerMonth-2,spinnerDay) <= minDate )
+                    _self.container.children("#nendai-month-spinner").children(".decrement").addClass('disabled');
+                else
+                    _self.container.children("#nendai-month-spinner").children(".decrement").removeClass('disabled');
+                if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) <= minDate )
+                    _self.container.children("#nendai-day-spinner").children(".decrement").addClass('disabled');
+                else
+                    _self.container.children("#nendai-day-spinner").children(".decrement").removeClass('disabled');
             }
             if(!(maxYear == null || maxMonth == null)){
                 if(maxDate <= testDate){
@@ -196,33 +207,19 @@
                         _self.setSpinnerMonth(_self,maxMonth);
                         _self.setSpinnerDay(_self,maxDay);
                 }
+                if( new Date(spinnerYear+1,spinnerMonth-1,spinnerDay) >= maxDate )
+                    _self.container.children("#nendai-year-spinner").children(".increment").addClass('disabled');
+                else
+                    _self.container.children("#nendai-year-spinner").children(".increment").removeClass('disabled');
+                if( new Date(spinnerYear,spinnerMonth,spinnerDay) >= maxDate )
+                    _self.container.children("#nendai-month-spinner").children(".increment").addClass('disabled');
+                else
+                    _self.container.children("#nendai-month-spinner").children(".increment").removeClass('disabled');
+                if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) >= maxDate )
+                    _self.container.children("#nendai-day-spinner").children(".increment").addClass('disabled');
+                else
+                    _self.container.children("#nendai-day-spinner").children(".increment").removeClass('disabled');
             }
-
-            if( new Date(spinnerYear-1,spinnerMonth-1,spinnerDay) <= minDate )
-                _self.container.children("#nendai-year-spinner").children(".decrement").addClass('disabled');
-            else
-                _self.container.children("#nendai-year-spinner").children(".decrement").removeClass('disabled');
-            if( new Date(spinnerYear,spinnerMonth-2,spinnerDay) <= minDate )
-                _self.container.children("#nendai-month-spinner").children(".decrement").addClass('disabled');
-            else
-                _self.container.children("#nendai-month-spinner").children(".decrement").removeClass('disabled');
-            if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) <= minDate )
-                _self.container.children("#nendai-day-spinner").children(".decrement").addClass('disabled');
-            else
-                _self.container.children("#nendai-day-spinner").children(".decrement").removeClass('disabled');
-
-            if( new Date(spinnerYear+1,spinnerMonth-1,spinnerDay) >= maxDate )
-                _self.container.children("#nendai-year-spinner").children(".increment").addClass('disabled');
-            else
-                _self.container.children("#nendai-year-spinner").children(".increment").removeClass('disabled');
-            if( new Date(spinnerYear,spinnerMonth,spinnerDay) >= maxDate )
-                _self.container.children("#nendai-month-spinner").children(".increment").addClass('disabled');
-            else
-                _self.container.children("#nendai-month-spinner").children(".increment").removeClass('disabled');
-            if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) >= maxDate )
-                _self.container.children("#nendai-day-spinner").children(".increment").addClass('disabled');
-            else
-                _self.container.children("#nendai-day-spinner").children(".increment").removeClass('disabled');
         }
     };
 
