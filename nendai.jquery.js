@@ -159,6 +159,7 @@
                 $(_self.element).val(_self.options.year+"-"+_self.options.month);
             else
                 $(_self.element).val(_self.options.year+"-"+_self.options.month+"-"+_self.options.day);
+            $(_self.element).trigger("change");
         },
 
         validateDateRange: function(_self){
