@@ -85,6 +85,7 @@
                 _self.clearCalendar(_self);
                 _self.container.hide();                
             });
+            _self.validateDateRange(_self);
         },
 
         clearCalendar: function(_self){
@@ -189,15 +190,15 @@
                         _self.setSpinnerMonth(_self,minMonth);
                         _self.setSpinnerDay(_self,minDay);
                 }
-                if( new Date(spinnerYear-1,spinnerMonth-1,spinnerDay) <= minDate )
+                if( new Date(spinnerYear-1,spinnerMonth,spinnerDay) <= minDate )
                     _self.container.children("#nendai-year-spinner").children(".decrement").addClass('disabled');
                 else
                     _self.container.children("#nendai-year-spinner").children(".decrement").removeClass('disabled');
-                if( new Date(spinnerYear,spinnerMonth-2,spinnerDay) <= minDate )
+                if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) <= minDate )
                     _self.container.children("#nendai-month-spinner").children(".decrement").addClass('disabled');
                 else
                     _self.container.children("#nendai-month-spinner").children(".decrement").removeClass('disabled');
-                if( new Date(spinnerYear,spinnerMonth-1,spinnerDay) <= minDate )
+                if( new Date(spinnerYear,spinnerMonth,spinnerDay) <= minDate )
                     _self.container.children("#nendai-day-spinner").children(".decrement").addClass('disabled');
                 else
                     _self.container.children("#nendai-day-spinner").children(".decrement").removeClass('disabled');
